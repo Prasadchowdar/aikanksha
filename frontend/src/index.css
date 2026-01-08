@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 body {
     margin: 0;
-    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -17,61 +17,42 @@ code {
 
 @layer base {
     :root {
-        --background: 45 40% 96%;
-        --foreground: 25 15% 15%;
-        --card: 35 32% 98%;
-        --card-foreground: 25 15% 15%;
-        --popover: 35 32% 98%;
-        --popover-foreground: 25 15% 15%;
-        --primary: 15 42% 52%;
-        --primary-foreground: 45 40% 96%;
-        --secondary: 145 18% 42%;
-        --secondary-foreground: 45 40% 96%;
-        --muted: 35 25% 88%;
-        --muted-foreground: 25 10% 45%;
-        --accent: 25 35% 32%;
-        --accent-foreground: 45 40% 96%;
-        --destructive: 0 65% 50%;
-        --destructive-foreground: 45 40% 96%;
-        --border: 35 20% 85%;
-        --input: 35 20% 85%;
-        --ring: 15 42% 52%;
-        --terra: 15 42% 52%;
-        --sage: 145 18% 42%;
-        --cream: 45 40% 96%;
-        --umber: 25 35% 32%;
-        --bone: 35 32% 92%;
-        --warm-charcoal: 25 8% 18%;
-        --soft-shadow: 25 20% 70%;
-        --radius: 0.75rem;
-    }
-    .dark {
-        --background: 25 15% 12%;
-        --foreground: 45 40% 96%;
-        --card: 25 15% 15%;
-        --card-foreground: 45 40% 96%;
-        --popover: 25 15% 15%;
-        --popover-foreground: 45 40% 96%;
-        --primary: 15 42% 58%;
-        --primary-foreground: 25 15% 12%;
-        --secondary: 145 18% 38%;
-        --secondary-foreground: 45 40% 96%;
-        --muted: 25 10% 25%;
-        --muted-foreground: 35 15% 65%;
-        --accent: 15 42% 58%;
-        --accent-foreground: 25 15% 12%;
-        --destructive: 0 65% 50%;
-        --destructive-foreground: 45 40% 96%;
-        --border: 25 10% 25%;
-        --input: 25 10% 25%;
-        --ring: 15 42% 58%;
-        --terra: 15 42% 58%;
-        --sage: 145 18% 38%;
-        --cream: 25 15% 12%;
-        --umber: 15 35% 42%;
-        --bone: 25 15% 20%;
-        --warm-charcoal: 45 40% 96%;
-        --soft-shadow: 25 10% 8%;
+        /* Editorial Light Theme */
+        --background: 40 20% 97%;
+        /* 'Bone' / Off-white */
+        --foreground: 220 10% 10%;
+        /* Deep Charcoal */
+
+        /* Cards: Slightly warmer/lighter */
+        --card: 0 0% 100%;
+        --card-foreground: 220 10% 10%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 220 10% 10%;
+
+        /* Primary: Muted Gold/Amber or Deep Navy - using Amber as Accent */
+        --primary: 35 30% 50%;
+        /* Muted Gold/Bronze */
+        --primary-foreground: 0 0% 100%;
+
+        /* Secondary: Soft Gray/Taupe */
+        --secondary: 40 10% 90%;
+        --secondary-foreground: 220 10% 10%;
+
+        --muted: 40 10% 92%;
+        --muted-foreground: 220 5% 45%;
+
+        --accent: 35 30% 50%;
+        --accent-foreground: 0 0% 100%;
+
+        --destructive: 0 84% 60%;
+        --destructive-foreground: 0 0% 98%;
+
+        --border: 220 10% 90%;
+        --input: 220 10% 90%;
+        --ring: 35 30% 50%;
+
+        --radius: 0.5rem;
     }
 }
 
@@ -79,57 +60,63 @@ code {
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-background text-foreground;
     }
-    h1, h2, h3, h4, h5, h6 {
-        font-family: 'Cormorant Garamond', serif;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Playfair Display', serif;
         font-weight: 600;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.01em;
     }
 }
 
 @layer components {
     .section-label {
-        @apply text-xs font-medium tracking-[0.2em] uppercase text-muted-foreground;
-        letter-spacing: 0.2em;
+        @apply text-xs font-semibold tracking-[0.2em] uppercase text-primary/80 mb-4 block;
     }
-    
+
     .editorial-heading {
-        @apply font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight text-accent;
+        @apply font-serif text-5xl md:text-6xl lg:text-8xl font-medium leading-[1.05] tracking-tight text-foreground;
     }
-    
+
     .body-text {
-        @apply text-base md:text-lg leading-relaxed text-foreground/90;
+        @apply font-sans text-xl md:text-2xl leading-relaxed text-muted-foreground font-light;
     }
-    
+
     .smooth-appear {
         animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         opacity: 0;
     }
-    
+
     .btn-warm {
-        @apply relative px-8 py-3 rounded-lg font-medium transition-all duration-300;
-        @apply bg-primary text-primary-foreground hover:bg-primary/90;
-        @apply shadow-sm hover:shadow-md hover:-translate-y-0.5;
+        @apply relative px-8 py-4 rounded-full font-medium transition-all duration-300 tracking-wide text-sm uppercase;
+        @apply bg-primary text-primary-foreground hover:bg-primary/90 hover:-translate-y-0.5;
+        box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
     }
-    
+
+    .btn-warm:hover {
+        box-shadow: 0 0 30px rgba(255, 193, 7, 0.4);
+    }
+
     .btn-outline-warm {
-        @apply relative px-8 py-3 rounded-lg font-medium transition-all duration-300;
-        @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+        @apply relative px-8 py-4 rounded-full font-medium transition-all duration-300 tracking-wide text-sm uppercase;
+        @apply border border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/60;
     }
-    
+
     .card-warm {
-        @apply bg-card border border-border/50 rounded-xl p-6 transition-all duration-300;
-        @apply hover:shadow-lg hover:-translate-y-1;
+        @apply bg-card/50 backdrop-blur-sm border border-white/5 rounded-2xl p-8 transition-all duration-500;
+        @apply hover:bg-card hover:border-primary/20 hover:shadow-2xl hover:shadow-black/50 hover:-translate-y-1;
     }
 }
 
 @layer utilities {
-    .font-serif {
-        font-family: 'Cormorant Garamond', serif;
-    }
-    
     .text-balance {
         text-wrap: balance;
     }
@@ -140,6 +127,7 @@ code {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -151,7 +139,7 @@ code {
         display: contents !important;
     }
 
-    [data-debug-wrapper="true"] > * {
+    [data-debug-wrapper="true"]>* {
         margin-left: inherit;
         margin-right: inherit;
         margin-top: inherit;
