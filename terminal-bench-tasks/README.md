@@ -151,6 +151,28 @@ Tuning knobs: remove the BOM layer (easier), move the package to a
 namespace layout (harder), add a `MANIFEST.in`/sdist-completeness layer
 (harder).
 
+### 4. `gomod-build-repair` — Go / go modules (difficulty: medium)
+
+A log-summarizing CLI whose module configuration and sources are broken
+seven ways. Offline (`GOPROXY=off`, `GOTOOLCHAIN=local`):
+
+| # | Defect | Kind |
+|---|--------|------|
+| 1 | `go 1.99` directive with `GOTOOLCHAIN=local` — no toolchain download possible | go.mod error |
+| 2 | Module declared as `example.com/logsft` (typo) while all imports say `example.com/logsift` | module path |
+| 3 | `stats` imports `report` for a rounding helper while `report` imports `stats` for its types → import cycle; the correct fix understands the helper is redundant before `%.3f` formatting | restructuring |
+| 4 | `var mean float64 = sum / int64(n)` — the compiling shortcut `float64(sum / int64(n))` silently truncates and fails the functional mean check; correct is float division | **semantic trap** |
+| 5 | Leftover `//go:build ignore` tag excludes the file defining `Percentile` → `undefined: Percentile` even though the function visibly exists | build tags |
+| 6 | Unused import (hard error in Go) | attrition |
+| 7 | `fmt.Errorf("... %d", raw)` with a string argument — `go vet ./...` must pass per the instruction | vet enforcement |
+
+Functional checks also discriminate a nearest-rank p95 implemented as
+`max()` (the two largest test latencies differ). `VERSION` is checksummed.
+
+Tuning knobs: drop the vet requirement (easier), give the percentile
+formula only by name without the index formula (harder), add a vendored
+third-party dependency with a broken `vendor/modules.txt` (much harder).
+
 ## Expected calibration (to be measured)
 
 | Task | Predicted failure band |
@@ -158,6 +180,7 @@ namespace layout (harder), add a `MANIFEST.in`/sdist-completeness layer
 | `veclab-build-repair` | 40–70% |
 | `plugin-registry-link-repair` | 50–80% |
 | `csvlite-packaging-repair` | 30–50% |
+| `gomod-build-repair` | 30–60% |
 
 Predictions are design targets based on chain length and trap count; the
 authoritative numbers come from the 10-trial calibration protocol above,
@@ -166,9 +189,9 @@ measurement.
 
 ## Local verification performed
 
-All verification was run on a toolchain matching the `ubuntu:24.04` task
-images (GCC 13.3, CMake 3.28, GNU Make 4.3, Python 3.11+ with setuptools
-≥ 61):
+All verification was run on a toolchain matching the task images (GCC
+13.3, CMake 3.28, GNU Make 4.3, Python 3.11+ with setuptools ≥ 61, Go
+1.24 with `GOTOOLCHAIN=local GOPROXY=off`):
 
 - Broken state: first error of every layer reproduced in the documented
   order for all three tasks; verifier reward = 0.
