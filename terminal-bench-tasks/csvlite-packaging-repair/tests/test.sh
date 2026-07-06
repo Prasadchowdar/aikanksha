@@ -71,11 +71,16 @@ rc=$?
 [ "$rc" -eq 0 ] || fail "stats basic.csv exited with $rc, expected 0"
 check_output "stats basic.csv --col value" "$expected_basic" "$out"
 
+# The BOM fixture is generated here so its leading bytes (EF BB BF)
+# never depend on VCS/transport byte fidelity.
+bom_csv=$(mktemp --suffix=.csv)
+printf '\xef\xbb\xbfvalue,label\n2.5,x\n3.5,y\n' > "$bom_csv"
 expected_bom=$(printf 'count = 2\nmean = 3.000\nmin = 2.500\nmax = 3.500')
-out=$("$CSVLITE" stats "$d/bom.csv" --col value)
+out=$("$CSVLITE" stats "$bom_csv" --col value)
 rc=$?
 [ "$rc" -eq 0 ] || fail "stats bom.csv exited with $rc (is the UTF-8 BOM ignored?)"
 check_output "stats bom.csv --col value (BOM handling)" "$expected_bom" "$out"
+rm -f "$bom_csv"
 
 err=$("$CSVLITE" stats "$d/basic.csv" --col nope 2>&1 >/dev/null)
 rc=$?
