@@ -1,0 +1,46 @@
+version = "1.0"
+
+# Artifacts collected from the container after the run, for review.
+artifacts = []
+
+[task]
+# Identity. `name` must be org/name form.
+name = "REPLACE_ME_org/REPLACE_ME_task_name"
+description = "One sentence stating the concrete engineering problem."
+keywords = []
+
+[[task.authors]]
+name = "Prasad Nadella"
+email = "prasadht34@gmail.com"
+
+[metadata]
+# --- Pre-seeded by the Dynamo team when the repo is created. DO NOT EDIT. ---
+# category = "..."
+# subcategory = "..."
+
+# --- Fellow-set. Arrays of lowercase snake_case labels drawn ONLY from
+# --- .dynamo/diversity-taxonomy.toml in the task repo (that file is the
+# --- source of truth; the docs page is just a browseable copy).
+# --- Tag the END GOAL and CENTRAL artifacts, not incidental helper tooling.
+task_objective = []   # e.g. ["debug", "recover_or_repair_artifact"]
+artifact_type = []    # e.g. ["codebase", "dataset_or_tabular_file"]
+
+difficulty = "hard"
+
+[verifier]
+# Time budget for the pytest run only.
+timeout_sec = 600.0
+
+[agent]
+# Ceiling is 3600s. Give real exploration room, but do not pad: an agent
+# that times out produces an INVALID failure that does not count toward
+# the pass@5 difficulty bar.
+timeout_sec = 3600.0
+
+[environment]
+build_timeout_sec = 1800.0
+# Prefer no-network for determinism. Everything needed must be in the image.
+network_mode = "no-network"
+cpus = 2
+memory_mb = 4096
+mcp_servers = []
