@@ -1,0 +1,6 @@
+2026-07-06T10:00:00Z INFO 12 request served
+2026-07-06T10:00:01Z WARN 40 slow response
+2026-07-06T10:00:02Z INFO 7 request served
+2026-07-06T10:00:03Z ERROR 130 upstream timeout
+2026-07-06T10:00:04Z INFO 25 request served
+2026-07-06T10:00:05Z WARN 33 retry scheduled

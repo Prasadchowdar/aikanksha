@@ -1,0 +1,6 @@
+#ifndef VECLAB_CONFIG_H
+#define VECLAB_CONFIG_H
+
+#define VECLAB_VERSION "@VERSION@"
+
+#endif /* VECLAB_CONFIG_H */

@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "csvlite"
+description = "Tiny CSV statistics toolkit"
+requires-python = ">=3.10"
+version = "0.0.0"
+dynamic = ["version"]
+name = "csvlite-tools"
+
+[project.scripts]
+csvlite = "csvlite.cli:run"
+
+[tool.setuptools.dynamic]
+version = {attr = "csvlite.__version__"}
